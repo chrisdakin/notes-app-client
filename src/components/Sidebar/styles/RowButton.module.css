@@ -13,8 +13,25 @@
 	text-overflow: ellipsis;
 }
 
-.Button:hover {
-	background-color: var(--global-highlight-color);
+.Button > p {
+	white-space: nowrap;
+	overflow-y: hidden;
+	overflow-x: hidden;
+	text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+	.Button > p {
+		overflow: hidden;
+		text-overflow: ellipsis;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		line-height: 1.5em;
+		max-height: 3em;
+		margin: 0;
+		white-space: normal;
+	}
 }
 
 .Button:active {

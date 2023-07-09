@@ -22,6 +22,8 @@ export const NotesContext = createContext<{
 	isLoading: boolean;
 	isCurrentNoteDirty: boolean;
 	setIsCurrentNoteDirty: Dispatch<SetStateAction<boolean>>;
+	isSidebarOpen: boolean;
+	setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
 }>({
 	notes: [],
 	currentNote: null,
@@ -33,6 +35,8 @@ export const NotesContext = createContext<{
 	isLoading: false,
 	isCurrentNoteDirty: false,
 	setIsCurrentNoteDirty: () => {},
+	isSidebarOpen: false,
+	setIsSidebarOpen: () => {},
 });
 
 export function NotesContextProvider({
@@ -49,6 +53,7 @@ export function NotesContextProvider({
 		notes.find((note) => note?.id === currentNoteId || null)
 	);
 	const [isCurrentNoteDirty, setIsCurrentNoteDirty] = useState(false);
+	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
 	const notInitialRender = useRef(false);
 
@@ -137,6 +142,8 @@ export function NotesContextProvider({
 				isLoading,
 				isCurrentNoteDirty,
 				setIsCurrentNoteDirty,
+				isSidebarOpen,
+				setIsSidebarOpen,
 			}}
 		>
 			{children}

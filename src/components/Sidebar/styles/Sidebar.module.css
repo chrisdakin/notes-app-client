@@ -1,15 +1,11 @@
 .SidebarContainer {
 	height: 100%;
 	width: 100%;
-	overflow: scroll;
+	overflow-y: scroll;
 	background-color: var(--secondary-global-background-color);
 }
 
 .NotesList {
 	display: flex;
 	flex-direction: column;
-}
-
-.Note {
-	margin-bottom: 8px;
 }

@@ -23,9 +23,7 @@ export default function App() {
 	return (
 		<div>
 			<div className={styles.App}>
-				<nav>
-					<Sidebar />
-				</nav>
+				<Sidebar />
 				<div className={styles.Divider} />
 				<div className={styles.MainContent}>
 					<Menu />
