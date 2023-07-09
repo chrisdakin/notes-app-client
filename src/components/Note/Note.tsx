@@ -1,6 +1,5 @@
 import { useContext, useState, useEffect, useCallback } from 'react';
 import { NotesContext } from '../../context/NotesContext';
-import { formatDate } from '../../utilities';
 import styles from './styles/Note.module.css';
 
 let timeout = 0;
@@ -30,7 +29,7 @@ export function CurrentNote() {
 
 			timeout = window.setTimeout(() => setIsTyping(false), duration);
 		},
-		[isCurrentNoteDirty]
+		[isCurrentNoteDirty, setIsCurrentNoteDirty]
 	);
 
 	useEffect(() => {
