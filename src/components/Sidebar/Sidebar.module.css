@@ -1,0 +1,14 @@
+.SidebarContainer {
+	height: 100%;
+	width: 10rem;
+	overflow: scroll;
+}
+
+.NotesList {
+	display: flex;
+	flex-direction: column;
+}
+
+.Note {
+	margin-bottom: 8px;
+}
