@@ -8,6 +8,7 @@ export async function addNote() {
 	try {
 		const response = await fetch(`${API_URL}/api/notes`, {
 			method: 'POST',
+			mode: 'no-cors',
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -25,6 +26,7 @@ export async function getNoteById(id: string) {
 	try {
 		const response = await fetch(`${API_URL}/api/notes/${id}`, {
 			method: 'GET',
+			mode: 'no-cors',
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -42,6 +44,7 @@ export async function getNotes() {
 	try {
 		const response = await fetch(`${API_URL}/api/notes`, {
 			method: 'GET',
+			mode: 'no-cors',
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -59,6 +62,7 @@ export async function saveNote(note: Note, keepalive: boolean = false) {
 	try {
 		const response = await fetch(`${API_URL}/api/notes/${note.id}`, {
 			method: 'PUT',
+			mode: 'no-cors',
 			headers: {
 				'Content-Type': 'application/json',
 			},
@@ -79,6 +83,7 @@ export async function deleteNote(noteId) {
 	try {
 		const response = await fetch(`${API_URL}/api/notes/${noteId}`, {
 			method: 'DELETE',
+			mode: 'no-cors',
 			headers: {
 				'Content-Type': 'application/json',
 			},
