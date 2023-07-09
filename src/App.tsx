@@ -5,8 +5,6 @@ import { Sidebar } from './components/Sidebar';
 import { CurrentNote } from './components/Note';
 import { NotesContext } from './context/NotesContext';
 
-import './global.css';
-
 export default function App() {
 	const { handleSaveCurrentNote } = useContext(NotesContext);
 
@@ -24,19 +22,17 @@ export default function App() {
 
 	return (
 		<div>
-			<Menu />
 			<div className={styles.App}>
 				<nav>
-					<div>
-						<Sidebar />
-					</div>
+					<Sidebar />
 				</nav>
 				<div className={styles.Divider} />
-				<main>
-					<div className={styles.noteContainer}>
+				<div className={styles.MainContent}>
+					<Menu />
+					<main>
 						<CurrentNote />
-					</div>
-				</main>
+					</main>
+				</div>
 			</div>
 		</div>
 	);

@@ -1,5 +1,22 @@
 .MenuContainer {
 	height: 50px;
 	display: flex;
-	margin-left: 5%;
+	flex-direction: row;
+	justify-content: space-between;
+	background-color: var(--secondary-global-background-color);
+	padding: 0 16px;
+	align-items: center;
+}
+
+.Button:focus-visible {
+	outline: 1px solid #fff;
+}
+
+.Icon {
+	height: 24px;
+	width: 24px;
+}
+
+.Icon > path {
+	stroke: var(--global-icon-color);
 }

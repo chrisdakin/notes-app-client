@@ -1,7 +1,8 @@
 .SidebarContainer {
 	height: 100%;
-	width: 10rem;
+	width: 100%;
 	overflow: scroll;
+	background-color: var(--secondary-global-background-color);
 }
 
 .NotesList {

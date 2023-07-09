@@ -1,13 +1,53 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body,
+html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	font-family: var(--global-font-family);
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: var(--primary-global-background-color);
+	color: var(--global-font-color);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+nav {
+	width: 20vw;
+}
+
+main {
+	width: 100%;
+	height: 90%;
+}
+
+div {
+	height: 100%;
+}
+
+div:focus-visible {
+	outline: 1px solid #fff;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0 8px;
+}
+
+button {
+	all: unset;
+}
+
+button:hover {
+	cursor: pointer;
+}
+
+:root {
+	--primary-global-background-color: #1d1e1f;
+	--secondary-global-background-color: #000522;
+	--global-highlight-color: #000988;
+	--global-font-color: #ffffff;
+	--global-icon-color: #c1c1c1;
+	--global-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
+		'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
 }
