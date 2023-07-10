@@ -37,7 +37,7 @@ export function CurrentNote() {
 
 			timeout = window.setTimeout(() => setIsTyping(false), duration);
 		},
-		[isCurrentNoteDirty, setIsCurrentNoteDirty]
+		[isCurrentNoteDirty, setIsCurrentNoteDirty, setIsTyping]
 	);
 
 	useEffect(() => {
