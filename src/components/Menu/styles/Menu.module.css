@@ -24,3 +24,15 @@
 .Icon > path {
 	stroke: var(--global-icon-color);
 }
+
+.Icon:active > path {
+	stroke: var(--global-icon-color-active);
+}
+
+.Icon:hover:not(:active) > path {
+	stroke: var(--global-icon-color-hover);
+}
+
+.CreateNoteIcon {
+	fill: transparent;
+}

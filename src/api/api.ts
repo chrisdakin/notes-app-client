@@ -1,7 +1,10 @@
 import { Note } from '../types';
+import { getUserId } from '../utilities';
 
 const URL =
 	process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : '';
+
+const userId = getUserId();
 
 export async function addNote() {
 	try {
@@ -10,6 +13,7 @@ export async function addNote() {
 			headers: {
 				'Content-Type': 'application/json',
 			},
+			body: JSON.stringify({ userId }),
 		});
 
 		const data = await response.json();
@@ -22,7 +26,7 @@ export async function addNote() {
 
 export async function getNotes() {
 	try {
-		const response = await fetch(`${URL}/api/notes`, {
+		const response = await fetch(`${URL}/api/notes/${userId}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -63,6 +67,7 @@ export async function deleteNote(noteId) {
 			headers: {
 				'Content-Type': 'application/json',
 			},
+			body: JSON.stringify({ userId }),
 		});
 
 		const data = await response.json();

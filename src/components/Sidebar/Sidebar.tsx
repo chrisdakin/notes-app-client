@@ -28,7 +28,7 @@ export function Sidebar() {
 						})}
 					</ul>
 				) : (
-					<p className={styles.NoNotes}>No saved notes!</p>
+					<p className={styles.NoNotes}>No saved notes</p>
 				)}
 			</div>
 		</nav>

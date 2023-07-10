@@ -23,6 +23,8 @@ export function Menu() {
 		isTyping || isLoading ? styles.ButtonDisabled : '',
 	].join(' ');
 
+	const createNoteIconClasses = [styles.Icon, styles.CreateNoteIcon].join(' ');
+
 	return (
 		<div className={styles.MenuContainer}>
 			{isMobile && (
@@ -42,7 +44,7 @@ export function Menu() {
 				tabIndex={0}
 				onClick={handleCreateNote}
 			>
-				<CreateNoteIcon className={styles.Icon} />
+				<CreateNoteIcon className={createNoteIconClasses} />
 			</button>
 			{currentNote?.updatedAt && !isSidebarOpen && (
 				<p aria-label="Last Updated">{formatDate(currentNote?.updatedAt)}</p>
