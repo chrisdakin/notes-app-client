@@ -21,6 +21,7 @@ export function Menu() {
 		<div className={styles.MenuContainer}>
 			{isMobile && (
 				<button
+					aria-label="Toggle Sidebar"
 					className={styles.Button}
 					tabIndex={0}
 					onClick={() => setIsSidebarOpen((curr) => !curr)}
@@ -28,24 +29,28 @@ export function Menu() {
 					<HamburgerIcon className={styles.Icon} />
 				</button>
 			)}
-			<button className={styles.Button} tabIndex={0} onClick={handleCreateNote}>
+			<button
+				aria-label="Create Note"
+				className={styles.Button}
+				tabIndex={0}
+				onClick={handleCreateNote}
+			>
 				<CreateNoteIcon className={styles.Icon} />
 			</button>
 			{currentNote?.updatedAt && !isSidebarOpen && (
-				<p>{formatDate(currentNote?.updatedAt)}</p>
+				<p aria-label="Last Updated">{formatDate(currentNote?.updatedAt)}</p>
 			)}
-			{!isSidebarOpen && (
-				<button
-					className={styles.Button}
-					tabIndex={0}
-					disabled={!currentNote}
-					onClick={() => {
-						handleDeleteNote(currentNote.id);
-					}}
-				>
-					<DeleteNoteIcon className={styles.Icon} />
-				</button>
-			)}
+			<button
+				aria-label="Delete Note"
+				className={styles.Button}
+				tabIndex={0}
+				disabled={!currentNote}
+				onClick={() => {
+					handleDeleteNote(currentNote.id);
+				}}
+			>
+				<DeleteNoteIcon className={styles.Icon} />
+			</button>
 		</div>
 	);
 }

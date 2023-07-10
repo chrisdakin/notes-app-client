@@ -1,10 +1,8 @@
 import { Note } from '../types';
 
-const API_URL = '';
-
 export async function addNote() {
 	try {
-		const response = await fetch(`${API_URL}/api/notes`, {
+		const response = await fetch('/api/notes', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -21,7 +19,7 @@ export async function addNote() {
 
 export async function getNoteById(id: string) {
 	try {
-		const response = await fetch(`${API_URL}/api/notes/${id}`, {
+		const response = await fetch(`/api/notes/${id}`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -38,7 +36,7 @@ export async function getNoteById(id: string) {
 
 export async function getNotes() {
 	try {
-		const response = await fetch(`${API_URL}/api/notes`, {
+		const response = await fetch('/api/notes', {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -55,7 +53,7 @@ export async function getNotes() {
 
 export async function saveNote(note: Note, keepalive: boolean = false) {
 	try {
-		const response = await fetch(`${API_URL}/api/notes/${note.id}`, {
+		const response = await fetch(`/api/notes/${note.id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
@@ -75,7 +73,7 @@ export async function saveNote(note: Note, keepalive: boolean = false) {
 
 export async function deleteNote(noteId) {
 	try {
-		const response = await fetch(`${API_URL}/api/notes/${noteId}`, {
+		const response = await fetch(`/api/notes/${noteId}`, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',

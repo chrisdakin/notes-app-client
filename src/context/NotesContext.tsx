@@ -19,7 +19,6 @@ export const NotesContext = createContext<{
 	handleUpdateNote: (text: string) => void;
 	handleSaveCurrentNote: (keepalive?: boolean) => void;
 	handleDeleteNote: (id: string) => void;
-	isLoading: boolean;
 	isCurrentNoteDirty: boolean;
 	setIsCurrentNoteDirty: Dispatch<SetStateAction<boolean>>;
 	isSidebarOpen: boolean;
@@ -32,7 +31,6 @@ export const NotesContext = createContext<{
 	handleUpdateNote: () => {},
 	handleSaveCurrentNote: () => {},
 	handleDeleteNote: () => {},
-	isLoading: false,
 	isCurrentNoteDirty: false,
 	setIsCurrentNoteDirty: () => {},
 	isSidebarOpen: false,
@@ -46,7 +44,6 @@ export function NotesContextProvider({
 	children: ReactElement;
 	data: Note[];
 }) {
-	const [isLoading, setIsLoading] = useState(false);
 	const [notes, setNotes] = useState(data || []);
 	const [currentNoteId, setCurrentNoteId] = useState(data[0]?.id || null);
 	const [currentNote, setCurrentNote] = useState(
@@ -139,7 +136,6 @@ export function NotesContextProvider({
 				handleUpdateNote,
 				handleSaveCurrentNote,
 				handleDeleteNote,
-				isLoading,
 				isCurrentNoteDirty,
 				setIsCurrentNoteDirty,
 				isSidebarOpen,

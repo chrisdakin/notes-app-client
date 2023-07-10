@@ -1,18 +1,23 @@
 import { ReactNode } from 'react';
 import styles from './styles/RowButton.module.css';
+import { Note } from '../../types';
 
 export function RowButton({
-	children,
+	isCurrentNote,
+	currentNote,
 	onClick,
-	isActive,
+	title,
 }: {
-	children: ReactNode;
+	isCurrentNote: boolean;
+	currentNote: Note;
 	onClick: () => void;
-	isActive: boolean;
+	title: string;
 }) {
 	return (
 		<div
-			className={`${styles.Button} ${isActive ? styles.ButtonActive : ''}`}
+			aria-label={title}
+			title={title}
+			className={`${styles.Button} ${isCurrentNote ? styles.ButtonActive : ''}`}
 			onClick={onClick}
 			onKeyDown={(event) => {
 				if (event.code === 'Enter' || event.code === 'Space') {
@@ -21,7 +26,7 @@ export function RowButton({
 			}}
 			tabIndex={0}
 		>
-			{children}
+			<p>{isCurrentNote ? currentNote.title : title}</p>
 		</div>
 	);
 }

@@ -41,6 +41,7 @@ export function CurrentNote() {
 	return currentNote ? (
 		<div className={styles.NoteContainer}>
 			<textarea
+				aria-label="Note Textarea"
 				className={styles.TextArea}
 				onChange={(evt) => {
 					handleIsTyping(500);
