@@ -14,6 +14,7 @@ export function Menu() {
 		isSidebarOpen,
 		setIsSidebarOpen,
 		isLoading,
+		isTyping,
 	} = useContext(NotesContext);
 
 	const isMobile = useIsMobile();
@@ -31,7 +32,7 @@ export function Menu() {
 				</button>
 			)}
 			<button
-				disabled={isLoading}
+				disabled={isTyping || isLoading}
 				aria-label="Create Note"
 				className={styles.Button}
 				tabIndex={0}

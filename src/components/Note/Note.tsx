@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useCallback } from 'react';
+import { useContext, useEffect, useCallback } from 'react';
 import { NotesContext } from '../../context/NotesContext';
 import styles from './styles/Note.module.css';
 
@@ -11,9 +11,9 @@ export function CurrentNote() {
 		handleSaveCurrentNote,
 		isCurrentNoteDirty,
 		setIsCurrentNoteDirty,
+		isTyping,
+		setIsTyping,
 	} = useContext(NotesContext);
-
-	const [isTyping, setIsTyping] = useState(false);
 
 	const handleIsTyping = useCallback(
 		(duration: number) => {

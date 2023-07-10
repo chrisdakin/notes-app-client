@@ -6,8 +6,7 @@ import { RowButton } from './RowButton';
 import styles from './styles/Sidebar.module.css';
 
 export function Sidebar() {
-	const { notes, currentNote, setCurrentNoteId, isSidebarOpen } =
-		useContext(NotesContext);
+	const { notes, currentNote, isSidebarOpen } = useContext(NotesContext);
 	const isMobile = useIsMobile();
 
 	return !isMobile || isSidebarOpen ? (
@@ -20,12 +19,7 @@ export function Sidebar() {
 
 							return (
 								<li key={id}>
-									<RowButton
-										onClick={() => setCurrentNoteId(id)}
-										isCurrentNote={isCurrentNote}
-										title={title}
-										currentNote={currentNote}
-									/>
+									<RowButton id isCurrentNote={isCurrentNote} title={title} />
 								</li>
 							);
 						})}

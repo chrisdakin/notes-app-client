@@ -23,6 +23,8 @@ export const NotesContext = createContext<{
 	isSidebarOpen: boolean;
 	setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
 	isLoading: boolean;
+	isTyping: boolean;
+	setIsTyping: Dispatch<SetStateAction<boolean>>;
 }>({
 	notes: [],
 	currentNote: null,
@@ -36,6 +38,8 @@ export const NotesContext = createContext<{
 	isSidebarOpen: false,
 	setIsSidebarOpen: () => {},
 	isLoading: false,
+	isTyping: false,
+	setIsTyping: () => {},
 });
 
 export function NotesContextProvider({
@@ -52,6 +56,7 @@ export function NotesContextProvider({
 	);
 	const [isCurrentNoteDirty, setIsCurrentNoteDirty] = useState(false);
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+	const [isTyping, setIsTyping] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
 	const notInitialRender = useRef(false);
 
@@ -146,6 +151,8 @@ export function NotesContextProvider({
 				isSidebarOpen,
 				setIsSidebarOpen,
 				isLoading,
+				isTyping,
+				setIsTyping,
 			}}
 		>
 			{children}

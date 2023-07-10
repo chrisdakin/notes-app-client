@@ -1,27 +1,41 @@
+import { useContext } from 'react';
 import { Note } from '../../types';
-
+import { NotesContext } from '../../context/NotesContext';
 import styles from './styles/RowButton.module.css';
 
 export function RowButton({
 	isCurrentNote,
-	currentNote,
-	onClick,
+	id,
 	title,
 }: {
 	isCurrentNote: boolean;
-	currentNote: Note;
-	onClick: () => void;
+	id;
 	title: string;
 }) {
+	const { currentNote, isTyping, isLoading, setCurrentNoteId } =
+		useContext(NotesContext);
+
+	const handleOnClick = () => {
+		if (!isTyping && !isLoading) {
+			setCurrentNoteId(id);
+		}
+	};
+
+	const rowClasses = [
+		styles.Button,
+		isCurrentNote ? styles.ButtonActive : '',
+		isTyping || isLoading ? styles.ButtonDisabled : '',
+	];
+
 	return (
 		<div
 			aria-label={title}
 			title={title}
-			className={`${styles.Button} ${isCurrentNote ? styles.ButtonActive : ''}`}
-			onClick={onClick}
+			className={rowClasses.join(' ')}
+			onClick={handleOnClick}
 			onKeyDown={(event) => {
 				if (event.code === 'Enter' || event.code === 'Space') {
-					onClick();
+					handleOnClick();
 				}
 			}}
 			tabIndex={0}

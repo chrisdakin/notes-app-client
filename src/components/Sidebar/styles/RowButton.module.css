@@ -41,3 +41,7 @@
 .ButtonActive {
 	background-color: var(--global-highlight-color);
 }
+
+.ButtonDisabled {
+	cursor: wait;
+}
