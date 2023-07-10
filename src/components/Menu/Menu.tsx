@@ -3,7 +3,6 @@ import { NotesContext } from '../../context/NotesContext';
 import { formatDate } from '../../utilities';
 import { CreateNoteIcon, DeleteNoteIcon, HamburgerIcon } from './icons';
 import { useIsMobile } from '../../hooks';
-
 import styles from './styles/Menu.module.css';
 
 export function Menu() {
@@ -19,12 +18,17 @@ export function Menu() {
 
 	const isMobile = useIsMobile();
 
+	const buttonClasses = [
+		styles.Button,
+		isTyping || isLoading ? styles.ButtonDisabled : '',
+	].join(' ');
+
 	return (
 		<div className={styles.MenuContainer}>
 			{isMobile && (
 				<button
 					aria-label="Toggle Sidebar"
-					className={styles.Button}
+					className={buttonClasses}
 					tabIndex={0}
 					onClick={() => setIsSidebarOpen((curr) => !curr)}
 				>
@@ -34,7 +38,7 @@ export function Menu() {
 			<button
 				disabled={isTyping || isLoading}
 				aria-label="Create Note"
-				className={styles.Button}
+				className={buttonClasses}
 				tabIndex={0}
 				onClick={handleCreateNote}
 			>
@@ -45,9 +49,9 @@ export function Menu() {
 			)}
 			<button
 				aria-label="Delete Note"
-				className={styles.Button}
+				className={buttonClasses}
 				tabIndex={0}
-				disabled={!currentNote}
+				disabled={!currentNote || isTyping || isLoading}
 				onClick={() => {
 					handleDeleteNote(currentNote.id);
 				}}

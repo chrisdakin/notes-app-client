@@ -11,7 +11,8 @@ html {
 }
 
 nav {
-	width: 20vw;
+	min-width: 15vw;
+	width: 15vw;
 }
 
 @media (max-width: 768px) {
@@ -51,6 +52,7 @@ button:hover {
 	--primary-global-background-color: #1d1e1f;
 	--secondary-global-background-color: #000522;
 	--global-highlight-color: #000988;
+	--global-top-bar-padding: 50px;
 	--global-font-color: #ffffff;
 	--global-icon-color: #c1c1c1;
 	--global-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',

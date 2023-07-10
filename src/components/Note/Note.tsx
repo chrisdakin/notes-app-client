@@ -1,4 +1,4 @@
-import { useContext, useEffect, useCallback } from 'react';
+import { useContext, useEffect, useRef, useCallback } from 'react';
 import { NotesContext } from '../../context/NotesContext';
 import styles from './styles/Note.module.css';
 
@@ -13,7 +13,15 @@ export function CurrentNote() {
 		setIsCurrentNoteDirty,
 		isTyping,
 		setIsTyping,
+		handleCreateNote,
 	} = useContext(NotesContext);
+
+	const inputElement = useRef(null);
+	useEffect(() => {
+		if (inputElement.current) {
+			inputElement.current.focus();
+		}
+	}, [currentNote, inputElement]);
 
 	const handleIsTyping = useCallback(
 		(duration: number) => {
@@ -41,6 +49,7 @@ export function CurrentNote() {
 	return currentNote ? (
 		<div className={styles.NoteContainer}>
 			<textarea
+				ref={inputElement}
 				aria-label="Note Textarea"
 				className={styles.TextArea}
 				onChange={(evt) => {
@@ -52,6 +61,6 @@ export function CurrentNote() {
 			<br />
 		</div>
 	) : (
-		<div>Add a note to begin</div>
+		<div onClick={handleCreateNote}>Click anywhere to start a new note</div>
 	);
 }

@@ -1,7 +1,5 @@
 import {
 	useState,
-	useRef,
-	useEffect,
 	createContext,
 	ReactElement,
 	Dispatch,
@@ -13,7 +11,7 @@ import { addNote, saveNote, getNotes, deleteNote } from '../api';
 export const NotesContext = createContext<{
 	notes: Note[];
 	currentNote: Note | null;
-	setCurrentNoteId: Dispatch<SetStateAction<string>>;
+	setCurrentNote: Dispatch<SetStateAction<Note>>;
 	handleCreateNote: () => void;
 	handleUpdateNote: (text: string) => void;
 	handleSaveCurrentNote: (keepalive?: boolean) => void;
@@ -25,10 +23,11 @@ export const NotesContext = createContext<{
 	isLoading: boolean;
 	isTyping: boolean;
 	setIsTyping: Dispatch<SetStateAction<boolean>>;
+	handleChangeNote: (id: string) => void;
 }>({
 	notes: [],
 	currentNote: null,
-	setCurrentNoteId: () => {},
+	setCurrentNote: () => {},
 	handleCreateNote: () => {},
 	handleUpdateNote: () => {},
 	handleSaveCurrentNote: () => {},
@@ -40,6 +39,7 @@ export const NotesContext = createContext<{
 	isLoading: false,
 	isTyping: false,
 	setIsTyping: () => {},
+	handleChangeNote: () => {},
 });
 
 export function NotesContextProvider({
@@ -50,39 +50,29 @@ export function NotesContextProvider({
 	data: Note[];
 }) {
 	const [notes, setNotes] = useState(data || []);
-	const [currentNoteId, setCurrentNoteId] = useState(data[0]?.id || null);
-	const [currentNote, setCurrentNote] = useState(
-		notes.find((note) => note?.id === currentNoteId || null)
-	);
+	const [currentNote, setCurrentNote] = useState(data[0] || null);
 	const [isCurrentNoteDirty, setIsCurrentNoteDirty] = useState(false);
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 	const [isTyping, setIsTyping] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
-	const notInitialRender = useRef(false);
 
-	// handle current note ID change
-	useEffect(() => {
+	const handleChangeNote = (id: string) => {
+		if (currentNote && isCurrentNoteDirty) {
+			saveNote(currentNote);
+			setIsCurrentNoteDirty(false);
+		}
 		const refetchNotes = async () => {
 			setIsLoading(true);
 			const notes = await getNotes();
 
 			if (!notes.error) {
 				setNotes(notes.data);
-				setCurrentNote(notes.data.find((note) => note.id === currentNoteId));
+				setCurrentNote(notes.data.find((note) => note.id === id));
 			}
 			setIsLoading(false);
 		};
-
-		if (notInitialRender.current) {
-			if (currentNote && isCurrentNoteDirty) {
-				saveNote(currentNote);
-				setIsCurrentNoteDirty(false);
-			}
-			refetchNotes();
-		} else {
-			notInitialRender.current = true;
-		}
-	}, [currentNoteId]);
+		refetchNotes();
+	};
 
 	const handleCreateNote = () => {
 		const createNoteWrapper = async () => {
@@ -93,7 +83,9 @@ export function NotesContextProvider({
 			};
 
 			await createNote();
-			setCurrentNoteId(response.data.newNoteId);
+			setCurrentNote(
+				response.data.notes.find((note) => note.id === response.data.newNoteId)
+			);
 		};
 		createNoteWrapper();
 	};
@@ -114,10 +106,10 @@ export function NotesContextProvider({
 	};
 
 	const handleUpdateNote = (text: string) => {
-		if (currentNoteId !== notes[0].id) {
+		if (currentNote.id !== notes[0].id) {
 			setNotes((notes) => {
 				const newNotes = [...notes];
-				const index = notes.findIndex((note) => note.id === currentNoteId);
+				const index = notes.findIndex((note) => note.id === currentNote.id);
 				newNotes.unshift(newNotes.splice(index, 1)[0]);
 				return newNotes;
 			});
@@ -133,7 +125,8 @@ export function NotesContextProvider({
 
 	const handleDeleteNote = async (id: string) => {
 		const response = await deleteNote(id);
-		setCurrentNoteId(response.data.notes[0]?.id || null);
+		setCurrentNote(response.data.notes[0] || null);
+		setNotes(response.data.notes);
 	};
 
 	return (
@@ -141,11 +134,12 @@ export function NotesContextProvider({
 			value={{
 				notes,
 				currentNote,
-				setCurrentNoteId,
+				setCurrentNote,
 				handleCreateNote,
 				handleUpdateNote,
 				handleSaveCurrentNote,
 				handleDeleteNote,
+				handleChangeNote,
 				isCurrentNoteDirty,
 				setIsCurrentNoteDirty,
 				isSidebarOpen,

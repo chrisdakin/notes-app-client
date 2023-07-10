@@ -2,7 +2,6 @@ import { useContext } from 'react';
 import { useIsMobile } from '../../hooks';
 import { NotesContext } from '../../context/NotesContext';
 import { RowButton } from './RowButton';
-
 import styles from './styles/Sidebar.module.css';
 
 export function Sidebar() {
@@ -19,13 +18,17 @@ export function Sidebar() {
 
 							return (
 								<li key={id}>
-									<RowButton id isCurrentNote={isCurrentNote} title={title} />
+									<RowButton
+										id={id}
+										isCurrentNote={isCurrentNote}
+										title={isCurrentNote ? currentNote.title : title}
+									/>
 								</li>
 							);
 						})}
 					</ul>
 				) : (
-					<div>Your notes will show up here</div>
+					<p className={styles.NoNotes}>No saved notes!</p>
 				)}
 			</div>
 		</nav>

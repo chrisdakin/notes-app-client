@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { Note } from '../../types';
 import { NotesContext } from '../../context/NotesContext';
 import styles from './styles/RowButton.module.css';
 
@@ -9,15 +8,14 @@ export function RowButton({
 	title,
 }: {
 	isCurrentNote: boolean;
-	id;
+	id: string;
 	title: string;
 }) {
-	const { currentNote, isTyping, isLoading, setCurrentNoteId } =
-		useContext(NotesContext);
+	const { isTyping, isLoading, handleChangeNote } = useContext(NotesContext);
 
 	const handleOnClick = () => {
 		if (!isTyping && !isLoading) {
-			setCurrentNoteId(id);
+			handleChangeNote(id);
 		}
 	};
 
@@ -25,13 +23,13 @@ export function RowButton({
 		styles.Button,
 		isCurrentNote ? styles.ButtonActive : '',
 		isTyping || isLoading ? styles.ButtonDisabled : '',
-	];
+	].join(' ');
 
 	return (
 		<div
 			aria-label={title}
 			title={title}
-			className={rowClasses.join(' ')}
+			className={rowClasses}
 			onClick={handleOnClick}
 			onKeyDown={(event) => {
 				if (event.code === 'Enter' || event.code === 'Space') {
@@ -40,7 +38,7 @@ export function RowButton({
 			}}
 			tabIndex={0}
 		>
-			<p>{isCurrentNote ? currentNote.title : title}</p>
+			<p>{title}</p>
 		</div>
 	);
 }
