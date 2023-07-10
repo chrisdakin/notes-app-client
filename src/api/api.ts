@@ -1,8 +1,8 @@
 import { Note } from '../types';
 
-const API_URL = 'http://localhost:8080';
+// const API_URL = 'http://localhost:8080';
 // const API_URL_OLD = '//3.19.227.0:8080/';
-// const API_URL = '//3.145.30.48:8080';
+const API_URL = 'http://ec2-3-145-30-48.us-east-2.compute.amazonaws.com:8080';
 
 export async function addNote() {
 	try {
