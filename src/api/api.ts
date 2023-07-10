@@ -1,8 +1,11 @@
 import { Note } from '../types';
 
+const URL =
+	process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : '';
+
 export async function addNote() {
 	try {
-		const response = await fetch('http://localhost:4000/api/notes', {
+		const response = await fetch(`${URL}/api/notes`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -19,7 +22,7 @@ export async function addNote() {
 
 export async function getNotes() {
 	try {
-		const response = await fetch('http://localhost:4000/api/notes', {
+		const response = await fetch(`${URL}/api/notes`, {
 			method: 'GET',
 			headers: {
 				'Content-Type': 'application/json',
@@ -36,7 +39,7 @@ export async function getNotes() {
 
 export async function saveNote(note: Note, keepalive: boolean = false) {
 	try {
-		const response = await fetch(`http://localhost:4000/api/notes/${note.id}`, {
+		const response = await fetch(`${URL}/api/notes/${note.id}`, {
 			method: 'PUT',
 			headers: {
 				'Content-Type': 'application/json',
@@ -45,7 +48,6 @@ export async function saveNote(note: Note, keepalive: boolean = false) {
 			body: JSON.stringify(note),
 		});
 
-		console.log(response);
 		const data = await response.json();
 		return { data, error: null, message: '' };
 	} catch (error) {
@@ -56,7 +58,7 @@ export async function saveNote(note: Note, keepalive: boolean = false) {
 
 export async function deleteNote(noteId) {
 	try {
-		const response = await fetch(`http://localhost:4000/api/notes/${noteId}`, {
+		const response = await fetch(`${URL}/api/notes/${noteId}`, {
 			method: 'DELETE',
 			headers: {
 				'Content-Type': 'application/json',
