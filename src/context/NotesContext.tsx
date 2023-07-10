@@ -22,6 +22,7 @@ export const NotesContext = createContext<{
 	setIsCurrentNoteDirty: Dispatch<SetStateAction<boolean>>;
 	isSidebarOpen: boolean;
 	setIsSidebarOpen: Dispatch<SetStateAction<boolean>>;
+	isLoading: boolean;
 }>({
 	notes: [],
 	currentNote: null,
@@ -34,6 +35,7 @@ export const NotesContext = createContext<{
 	setIsCurrentNoteDirty: () => {},
 	isSidebarOpen: false,
 	setIsSidebarOpen: () => {},
+	isLoading: false,
 });
 
 export function NotesContextProvider({
@@ -50,18 +52,20 @@ export function NotesContextProvider({
 	);
 	const [isCurrentNoteDirty, setIsCurrentNoteDirty] = useState(false);
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
+	const [isLoading, setIsLoading] = useState(false);
 	const notInitialRender = useRef(false);
 
 	// handle current note ID change
 	useEffect(() => {
 		const refetchNotes = async () => {
+			setIsLoading(true);
 			const notes = await getNotes();
 
 			if (!notes.error) {
 				setNotes(notes.data);
 				setCurrentNote(notes.data.find((note) => note.id === currentNoteId));
 			}
+			setIsLoading(false);
 		};
 
 		if (notInitialRender.current) {
@@ -91,6 +95,7 @@ export function NotesContextProvider({
 
 	const handleSaveCurrentNote = async (keepalive: boolean = false) => {
 		if (currentNote) {
+			setIsLoading(true);
 			const response = await saveNote(currentNote, keepalive);
 
 			if (!response.error) {
@@ -99,6 +104,7 @@ export function NotesContextProvider({
 					updatedAt: new Date().toISOString(),
 				}));
 			}
+			setIsLoading(false);
 		}
 	};
 
@@ -139,6 +145,7 @@ export function NotesContextProvider({
 				setIsCurrentNoteDirty,
 				isSidebarOpen,
 				setIsSidebarOpen,
+				isLoading,
 			}}
 		>
 			{children}
