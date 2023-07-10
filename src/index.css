@@ -17,6 +17,7 @@ nav {
 
 @media (max-width: 768px) {
 	nav {
+		min-width: 60vw;
 		width: 60vw;
 	}
 }
