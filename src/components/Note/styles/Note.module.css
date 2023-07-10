@@ -18,3 +18,7 @@
 .TextArea:focus-visible {
 	outline: none;
 }
+
+.NoNotes {
+	padding: 16px;
+}

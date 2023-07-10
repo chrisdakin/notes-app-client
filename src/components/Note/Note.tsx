@@ -61,6 +61,8 @@ export function CurrentNote() {
 			<br />
 		</div>
 	) : (
-		<div onClick={handleCreateNote}>Click anywhere to start a new note</div>
+		<div className={styles.NoNotes} onClick={handleCreateNote}>
+			Click here to add a new note
+		</div>
 	);
 }
