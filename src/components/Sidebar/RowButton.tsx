@@ -1,6 +1,6 @@
-import { ReactNode } from 'react';
-import styles from './styles/RowButton.module.css';
 import { Note } from '../../types';
+
+import styles from './styles/RowButton.module.css';
 
 export function RowButton({
 	isCurrentNote,

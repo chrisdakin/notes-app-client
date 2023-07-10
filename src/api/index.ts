@@ -1,1 +1,1 @@
-export { addNote, getNoteById, getNotes, saveNote, deleteNote } from './api';
+export { addNote, getNotes, saveNote, deleteNote } from './api';

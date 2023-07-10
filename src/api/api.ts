@@ -17,23 +17,6 @@ export async function addNote() {
 	}
 }
 
-export async function getNoteById(id: string) {
-	try {
-		const response = await fetch(`/api/notes/${id}`, {
-			method: 'GET',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
-
-		const data = await response.json();
-		return { data, error: null, message: '' };
-	} catch (error) {
-		console.error('Error retrieving note:', error);
-		return { data: null, error, message: 'Error retrieving note' };
-	}
-}
-
 export async function getNotes() {
 	try {
 		const response = await fetch('/api/notes', {

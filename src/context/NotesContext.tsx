@@ -6,10 +6,9 @@ import {
 	ReactElement,
 	Dispatch,
 	SetStateAction,
-	useCallback,
 } from 'react';
 import { Note } from '../types';
-import { addNote, saveNote, getNotes, getNoteById, deleteNote } from '../api';
+import { addNote, saveNote, getNotes, deleteNote } from '../api';
 
 export const NotesContext = createContext<{
 	notes: Note[];

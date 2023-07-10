@@ -4,7 +4,7 @@ import { formatDate } from '../../utilities';
 import { CreateNoteIcon, DeleteNoteIcon, HamburgerIcon } from './icons';
 import { useIsMobile } from '../../hooks';
 
-import styles from './Menu.module.css';
+import styles from './styles/Menu.module.css';
 
 export function Menu() {
 	const {
