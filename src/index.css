@@ -8,6 +8,7 @@ html {
 	-moz-osx-font-smoothing: grayscale;
 	background-color: var(--primary-global-background-color);
 	color: var(--global-font-color);
+	overflow-y: hidden;
 }
 
 nav {
