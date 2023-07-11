@@ -11,7 +11,7 @@ export function Sidebar() {
 	const isMobile = useIsMobile();
 
 	const filteredNotes = searchValue
-		? notes.filter((note) =>
+		? [...notes, currentNote].filter((note) =>
 				note.text?.toLowerCase().includes(searchValue.toLocaleLowerCase())
 		  )
 		: notes;
