@@ -1,5 +1,22 @@
+.SearchContainer {
+	height: var(--global-top-bar-padding);
+	background-color: #393f43;
+}
+
+.SearchInput {
+	background-color: var(--global-background-color);
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	border: none;
+	outline: none;
+	font-size: 18px;
+	color: var(--global-font-color);
+	padding-left: 8px;
+}
+
 .SidebarContainer {
-	padding-top: var(--global-top-bar-padding);
+	padding-top: 16px;
 	height: 100%;
 	width: 100%;
 	overflow-y: scroll;

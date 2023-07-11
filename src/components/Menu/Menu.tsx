@@ -27,9 +27,10 @@ export function Menu() {
 
 	const createNoteIconClasses = [styles.Icon, styles.CreateNoteIcon].join(' ');
 
-	const allNoteLengthsValid = notes.every((note) =>
-		checkNoteLengthValid(note?.text || '')
-	);
+	const allNoteLengthsValid = [
+		...notes.filter((note) => note.id !== currentNote.id),
+		currentNote,
+	].every((note) => checkNoteLengthValid(note?.text || ''));
 
 	const onTryCreateNote = () => {
 		if (allNoteLengthsValid) {

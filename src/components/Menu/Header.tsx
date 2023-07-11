@@ -16,7 +16,7 @@ export function Header() {
 	const noteTooShort = noteLength < MIN_NOTE_LENGTH;
 	const isValid = checkNoteLengthValid(currentNote?.text || '');
 
-	const error = currentNote && (
+	const error = currentNote && !isSidebarOpen && (
 		<div className={styles.ErrorContainer}>
 			<p aria-label="Note error" className={styles.ErrorText}>
 				{!isMobile ? 'Note is ' : ''}
