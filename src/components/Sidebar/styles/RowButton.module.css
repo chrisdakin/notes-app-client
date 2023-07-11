@@ -1,4 +1,6 @@
 .Button {
+	display: flex;
+	align-items: center;
 	padding: 8px 16px;
 	background-color: var(--secondary-global-background-color);
 	color: var(--global-font-color);
@@ -44,4 +46,15 @@
 
 .ButtonDisabled {
 	cursor: wait;
+}
+
+.Error {
+	color: red;
+}
+
+.Icon {
+	fill: red;
+	height: 22px;
+	width: 22px;
+	margin-left: auto;
 }

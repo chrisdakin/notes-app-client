@@ -4,13 +4,18 @@ import { Menu } from './components/Menu';
 import { Sidebar } from './components/Sidebar';
 import { CurrentNote } from './components/Note';
 import { NotesContext } from './context/NotesContext';
+import { checkNoteLengthValid } from './utilities';
 
 export default function App() {
-	const { handleSaveCurrentNote } = useContext(NotesContext);
+	const { handleSaveCurrentNote, isCurrentNoteDirty, currentNote } =
+		useContext(NotesContext);
 
 	const saveNoteBeforeUnload = useCallback(
-		() => handleSaveCurrentNote(true),
-		[handleSaveCurrentNote]
+		() =>
+			isCurrentNoteDirty &&
+			checkNoteLengthValid(currentNote.text) &&
+			handleSaveCurrentNote(true),
+		[isCurrentNoteDirty, handleSaveCurrentNote, checkNoteLengthValid]
 	);
 
 	useEffect(() => {

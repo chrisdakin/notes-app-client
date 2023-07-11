@@ -1,2 +1,3 @@
-export { formatDate } from './dates';
+export { formatDate } from './formatDate';
 export { getUserId } from './getUserId';
+export { checkNoteLengthValid } from './checkNoteLengthValid';

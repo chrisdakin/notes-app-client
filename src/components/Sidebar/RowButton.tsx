@@ -1,15 +1,19 @@
 import { useContext } from 'react';
 import { NotesContext } from '../../context/NotesContext';
+import { ErrorIcon } from '../Menu/icons';
+import { checkNoteLengthValid } from '../../utilities';
 import styles from './styles/RowButton.module.css';
 
 export function RowButton({
 	isCurrentNote,
 	id,
 	title,
+	text,
 }: {
 	isCurrentNote: boolean;
 	id: string;
 	title: string;
+	text: string;
 }) {
 	const { isTyping, isLoading, handleChangeNote } = useContext(NotesContext);
 
@@ -19,10 +23,13 @@ export function RowButton({
 		}
 	};
 
+	const noteLengthIsValid = checkNoteLengthValid(text);
+
 	const rowClasses = [
 		styles.Button,
 		isCurrentNote ? styles.ButtonActive : '',
 		isTyping || isLoading ? styles.ButtonDisabled : '',
+		!noteLengthIsValid ? styles.Error : '',
 	].join(' ');
 
 	return (
@@ -39,6 +46,7 @@ export function RowButton({
 			tabIndex={0}
 		>
 			<p>{title}</p>
+			{!noteLengthIsValid && <ErrorIcon className={styles.Icon} />}
 		</div>
 	);
 }

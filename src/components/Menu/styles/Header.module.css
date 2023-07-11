@@ -1,0 +1,26 @@
+.ErrorContainer {
+	display: flex;
+	align-items: center;
+}
+
+.ErrorText {
+	color: red;
+	margin-right: 4px;
+	font-size: 18px;
+}
+
+@media (max-width: 768px) {
+	.ErrorText {
+		font-size: 12px;
+		margin: 0px 8px;
+	}
+}
+
+.Icon {
+	height: 32px;
+	width: 32px;
+}
+
+.Icon > path {
+	fill: red;
+}

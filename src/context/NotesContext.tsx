@@ -7,6 +7,7 @@ import {
 } from 'react';
 import { Note } from '../types';
 import { addNote, saveNote, getNotes, deleteNote } from '../api';
+import { checkNoteLengthValid } from '../utilities';
 
 export const NotesContext = createContext<{
 	notes: Note[];
@@ -57,17 +58,21 @@ export function NotesContextProvider({
 	const [isLoading, setIsLoading] = useState(false);
 
 	const handleChangeNote = (id: string) => {
-		if (currentNote && isCurrentNoteDirty) {
+		if (
+			currentNote &&
+			isCurrentNoteDirty &&
+			checkNoteLengthValid(currentNote.text)
+		) {
 			saveNote(currentNote);
 			setIsCurrentNoteDirty(false);
 		}
 		const refetchNotes = async () => {
 			setIsLoading(true);
-			const notes = await getNotes();
+			const newNotes = await getNotes();
 
-			if (!notes.error) {
-				setNotes(notes.data);
-				setCurrentNote(notes.data.find((note) => note.id === id));
+			if (!newNotes.error) {
+				setNotes(newNotes.data);
+				setCurrentNote(newNotes.data.find((note) => note.id === id));
 			}
 			setIsLoading(false);
 		};
@@ -91,7 +96,9 @@ export function NotesContextProvider({
 	};
 
 	const handleSaveCurrentNote = async (keepalive: boolean = false) => {
-		if (currentNote) {
+		const noteLengthIsValid = checkNoteLengthValid(currentNote?.text);
+
+		if (currentNote && noteLengthIsValid) {
 			setIsLoading(true);
 			const response = await saveNote(currentNote, keepalive);
 

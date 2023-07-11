@@ -13,7 +13,7 @@ export function Sidebar() {
 			<div className={styles.SidebarContainer}>
 				{notes?.length && currentNote ? (
 					<ul className={styles.NotesList}>
-						{notes.map(({ title, id }) => {
+						{notes.map(({ title, id, text }) => {
 							const isCurrentNote = id === currentNote.id;
 
 							return (
@@ -22,6 +22,7 @@ export function Sidebar() {
 										id={id}
 										isCurrentNote={isCurrentNote}
 										title={isCurrentNote ? currentNote.title : title}
+										text={isCurrentNote ? currentNote.text : text}
 									/>
 								</li>
 							);

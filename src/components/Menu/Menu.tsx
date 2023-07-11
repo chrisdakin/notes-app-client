@@ -1,8 +1,9 @@
 import { useContext } from 'react';
 import { NotesContext } from '../../context/NotesContext';
-import { formatDate } from '../../utilities';
 import { CreateNoteIcon, DeleteNoteIcon, HamburgerIcon } from './icons';
+import { Header } from './Header';
 import { useIsMobile } from '../../hooks';
+import { checkNoteLengthValid } from '../../utilities';
 import styles from './styles/Menu.module.css';
 
 export function Menu() {
@@ -10,10 +11,11 @@ export function Menu() {
 		currentNote,
 		handleCreateNote,
 		handleDeleteNote,
-		isSidebarOpen,
 		setIsSidebarOpen,
 		isLoading,
 		isTyping,
+		notes,
+		setCurrentNote,
 	} = useContext(NotesContext);
 
 	const isMobile = useIsMobile();
@@ -24,6 +26,18 @@ export function Menu() {
 	].join(' ');
 
 	const createNoteIconClasses = [styles.Icon, styles.CreateNoteIcon].join(' ');
+
+	const allNoteLengthsValid = notes.every((note) =>
+		checkNoteLengthValid(note?.text || '')
+	);
+
+	const onTryCreateNote = () => {
+		if (allNoteLengthsValid) {
+			handleCreateNote();
+		} else {
+			setCurrentNote(notes.find((note) => !checkNoteLengthValid(note.text)));
+		}
+	};
 
 	return (
 		<div className={styles.MenuContainer}>
@@ -42,13 +56,11 @@ export function Menu() {
 				aria-label="Create Note"
 				className={buttonClasses}
 				tabIndex={0}
-				onClick={handleCreateNote}
+				onClick={onTryCreateNote}
 			>
 				<CreateNoteIcon className={createNoteIconClasses} />
 			</button>
-			{currentNote?.updatedAt && !isSidebarOpen && (
-				<p aria-label="Last Updated">{formatDate(currentNote?.updatedAt)}</p>
-			)}
+			<Header />
 			<button
 				aria-label="Delete Note"
 				className={buttonClasses}

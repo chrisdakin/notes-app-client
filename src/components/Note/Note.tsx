@@ -44,7 +44,7 @@ export function CurrentNote() {
 		if (!isTyping && isCurrentNoteDirty) {
 			handleSaveCurrentNote();
 		}
-	}, [isTyping, handleIsTyping]);
+	}, [isTyping]);
 
 	return currentNote ? (
 		<div className={styles.NoteContainer}>
