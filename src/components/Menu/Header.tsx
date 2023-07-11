@@ -16,26 +16,28 @@ export function Header() {
 	const noteTooShort = noteLength < MIN_NOTE_LENGTH;
 	const isValid = checkNoteLengthValid(currentNote?.text || '');
 
-	const error = currentNote && !isSidebarOpen && (
-		<div className={styles.ErrorContainer}>
+	const error = currentNote && (
+		<>
 			<p aria-label="Note error" className={styles.ErrorText}>
 				{!isMobile ? 'Note is ' : ''}
 				{noteTooShort
 					? MIN_NOTE_LENGTH - noteLength
 					: noteLength - MAX_NOTE_LENGTH}{' '}
 				characters
-				{noteTooShort ? ' under' : ' over'} limit {isMobile ? '-' : 'and'} won't
-				be saved
+				{noteTooShort ? ' under' : ' over'} limit{' '}
+				{isMobile ? '' : "and won't be saved"}
 			</p>
 			{!isMobile && <ErrorIcon className={styles.Icon} />}
-		</div>
+		</>
 	);
 
-	const date = currentNote?.updatedAt && !isSidebarOpen && (
+	const date = currentNote?.updatedAt && (
 		<p aria-label="Last Updated">
 			{!isMobile && 'Last saved'} {formatDate(currentNote?.updatedAt)}
 		</p>
 	);
 
-	return isValid ? date : error;
+	return !isSidebarOpen ? (
+		<div className={styles.Container}>{isValid ? date : error}</div>
+	) : null;
 }

@@ -1,6 +1,8 @@
-.ErrorContainer {
+.Container {
 	display: flex;
 	align-items: center;
+	justify-content: center;
+	width: 60%;
 }
 
 .ErrorText {
