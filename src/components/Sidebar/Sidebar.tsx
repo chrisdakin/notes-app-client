@@ -11,12 +11,12 @@ export function Sidebar() {
 	const isMobile = useIsMobile();
 
 	const notesWithCurrent = notes.map((note) =>
-		note.id === currentNote.id ? currentNote : note
+		note.id === currentNote?.id ? currentNote : note
 	);
 
 	const filteredNotes = searchValue
 		? notesWithCurrent.filter((note) =>
-				note.text?.toLowerCase().includes(searchValue.toLocaleLowerCase())
+				note?.text?.toLowerCase().includes(searchValue.toLocaleLowerCase())
 		  )
 		: notes;
 

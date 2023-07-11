@@ -68,7 +68,7 @@ export function NotesContextProvider({
 		if (
 			currentNote &&
 			isCurrentNoteDirty &&
-			checkNoteLengthValid(currentNote.text)
+			checkNoteLengthValid(currentNote?.text)
 		) {
 			saveNote(currentNote);
 			setIsCurrentNoteDirty(false);
@@ -124,7 +124,7 @@ export function NotesContextProvider({
 	};
 
 	const handleUpdateNote = (text: string) => {
-		if (currentNote.id !== notes[0].id) {
+		if (currentNote?.id !== notes[0].id) {
 			setNotes((notes) => {
 				const newNotes = [...notes];
 				const index = notes.findIndex((note) => note.id === currentNote.id);
