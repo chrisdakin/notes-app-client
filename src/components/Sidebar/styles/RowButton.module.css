@@ -41,7 +41,7 @@
 
 .ButtonActive {
 	background-color: var(--global-highlight-color);
-	transition: background-color 0.3s ease;
+	transition: background-color 0.2s ease;
 }
 
 .ButtonDisabled {
@@ -49,11 +49,11 @@
 }
 
 .Error {
-	color: red;
+	color: var(--global-error-color);
 }
 
 .Icon {
-	fill: red;
+	fill: var(--global-error-color);
 	height: 22px;
 	width: 22px;
 	margin-left: auto;

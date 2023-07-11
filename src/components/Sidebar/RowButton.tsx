@@ -9,11 +9,13 @@ export function RowButton({
 	id,
 	title,
 	text,
+	searchValue,
 }: {
 	isCurrentNote: boolean;
 	id: string;
 	title: string;
 	text: string;
+	searchValue: string;
 }) {
 	const { isTyping, isLoading, handleChangeNote } = useContext(NotesContext);
 

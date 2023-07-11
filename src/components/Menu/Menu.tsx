@@ -33,7 +33,7 @@ export function Menu() {
 	const createNoteIconClasses = [
 		styles.Icon,
 		styles.CreateNoteIcon,
-		!allNoteLengthsValid ? styles.IconDisabled : '',
+		!checkNoteLengthValid(currentNote?.text) ? styles.IconDisabled : '',
 	].join(' ');
 
 	const onTryCreateNote = () => {
@@ -44,9 +44,12 @@ export function Menu() {
 		}
 	};
 
-	const createDisabled = isTyping || isLoading || !allNoteLengthsValid;
+	const createDisabled = isTyping || isLoading;
 	const deleteDisabled =
-		!currentNote || isTyping || isLoading || notes.length <= 1;
+		!currentNote ||
+		isTyping ||
+		isLoading ||
+		(notes.length <= 1 && !allNoteLengthsValid);
 	const createButtonClasses = [
 		buttonClasses,
 		createDisabled ? styles.Disabled : '',

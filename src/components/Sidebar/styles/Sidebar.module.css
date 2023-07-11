@@ -1,6 +1,8 @@
 .SearchContainer {
 	height: var(--global-top-bar-padding);
 	background-color: #393f43;
+	display: flex;
+	flex-direction: row;
 }
 
 .SearchInput {
@@ -13,6 +15,31 @@
 	font-size: 18px;
 	color: var(--global-font-color);
 	padding-left: 8px;
+}
+
+.SearchClearButton {
+	cursor: pointer;
+	padding-right: 4px;
+}
+
+.SearchClearIcon {
+	height: 24px;
+	width: 24px;
+}
+
+.SearchClearIcon > path {
+	stroke: var(--global-icon-color);
+	fill: var(--global-icon-color);
+}
+
+.SearchClearIcon:active > path {
+	stroke: var(--global-icon-color-active);
+	fill: var(--global-icon-color-active);
+}
+
+.SearchClearIcon:hover:not(:active) > path {
+	stroke: var(--global-icon-color-hover);
+	fill: var(--global-icon-color-hover);
 }
 
 .SidebarContainer {
