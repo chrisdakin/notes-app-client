@@ -1,6 +1,6 @@
 Tradeoffs:
 
-I decided to implement an auto-save feature early on in the project and the main tradeoff with this wound up being the warning message on every new note. With more time and thought I could come up with a better solution (considered only using an icon and then adding a tooltip with the detailed warning message) but didn't want to spend too much time on that particular aspect of the UI.
+I decided to implement an auto-save feature early on in the project - the main tradeoff with this was the agressive warning message on every new note. With more time and thought I could come up with a better solution (considered only using an icon and then adding a tooltip with the detailed warning message) but didn't want to spend too much time on that particular aspect of the UI.
 
 The auto-save results in a lot of requests to the back end and in the real world I'd probably use websockets for this, which would also allow for multi-user editing. It's been awhile since I've used websockets and I wanted to limit external dependencies as much as possible so I just stuck with fetch/http requests for this.
 
