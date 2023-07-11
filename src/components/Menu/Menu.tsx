@@ -53,7 +53,9 @@ export function Menu() {
 	const createNoteIconClasses = [
 		styles.Icon,
 		styles.CreateNoteIcon,
-		!checkNoteLengthValid(currentNote?.text) ? styles.IconDisabled : '',
+		!checkNoteLengthValid(currentNote?.text)
+			? `${styles.IconDisabled} ${styles.CreateNoteDisabled}`
+			: '',
 	].join(' ');
 
 	const hamburgerIconClasses = [styles.Icon, styles.HamburgerIcon].join(' ');

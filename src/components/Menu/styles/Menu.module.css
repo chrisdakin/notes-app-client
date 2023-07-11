@@ -50,8 +50,24 @@
 	fill: var(--global-icon-color);
 }
 
+.CreateNoteIcon:active > path:last-child {
+	fill: var(--global-icon-color-active);
+}
+
+.CreateNoteIcon:active > path:first-child {
+	stroke: var(--global-icon-color-active);
+}
+
+.CreateNoteIcon:hover:not(:active) > path:last-child {
+	fill: var(--global-icon-color-hover);
+}
+
+.CreateNoteDisabled > path:last-child {
+	fill: var(--global-icon-color-disabled) !important;
+}
+
 .CreateNoteIcon > path:last-child {
-	stroke: transparent;
+	stroke: transparent !important;
 }
 
 .HamburgerIcon > path {
