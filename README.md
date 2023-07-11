@@ -1,70 +1,9 @@
-# Getting Started with Create React App
+Tradeoffs:
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+I decided to implement an auto-save feature early on in the project and the main tradeoff with this wound up being the warning message on every new note. With more time and thought I could come up with a better solution (considered only using an icon and then adding a tooltip with the detailed warning message) but didn't want to spend too much time on that particular aspect of the UI.
 
-## Available Scripts
+The auto-save results in a lot of requests to the back end and in the real world I'd probably use websockets for this, which would also allow for multi-user editing. It's been awhile since I've used websockets and I wanted to limit external dependencies as much as possible so I just stuck with fetch/http requests for this.
 
-In the project directory, you can run:
+Wanting to keep things simple, I went with basic css for styling - in hindsight I should've used sass as I'm already comfortable with it and, if I remember correctly, create-react-app supports it out of the box. It would've been much less of a headache once I started getting into the detailed icon/button styling, but the end result is the same so no trade off there except in developemnt time.
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+I decided to keep a lot of state in react context early on which wound up being very helpful as there's a lot of cross functionality between the components. Originally I had a useEffect that handled all of the note changing but that resulted in a lot of race conditions once I was making real server calls so I switched to a more declarative approach. This meant more large state updates as I was now returning all of the notes from the server with most of my non-read CRUD operations, but it fixed a lot of bugs and closed a lot of vectors for future bugs by reducing the state management complexity. I would definitely want to address this if I were focused on scaling the app but with the number of notes I'm expecting to handle (for the purposes of this project) it's not an issue.
