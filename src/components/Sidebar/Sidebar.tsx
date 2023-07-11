@@ -11,11 +11,11 @@ export function Sidebar() {
 
 	const filteredNotes = searchValue
 		? notes.filter(
-				(note) => currentNote.id === note.id || note.text.includes(searchValue)
+				(note) =>
+					currentNote.id === note.id ||
+					note.text?.toLowerCase().includes(searchValue.toLocaleLowerCase())
 		  )
 		: notes;
-	console.log(!!searchValue);
-	console.log(filteredNotes);
 
 	return !isMobile || isSidebarOpen ? (
 		<nav>
