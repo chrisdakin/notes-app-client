@@ -10,8 +10,12 @@ export function Sidebar() {
 	const [searchValue, setSearchValue] = useState('');
 	const isMobile = useIsMobile();
 
+	const notesWithCurrent = notes.map((note) =>
+		note.id === currentNote.id ? currentNote : note
+	);
+
 	const filteredNotes = searchValue
-		? [...notes, currentNote].filter((note) =>
+		? notesWithCurrent.filter((note) =>
 				note.text?.toLowerCase().includes(searchValue.toLocaleLowerCase())
 		  )
 		: notes;
@@ -41,7 +45,6 @@ export function Sidebar() {
 						{filteredNotes.length ? (
 							filteredNotes.map(({ title, id, text }) => {
 								const isCurrentNote = id === currentNote.id;
-
 								return (
 									<li key={id}>
 										<RowButton
