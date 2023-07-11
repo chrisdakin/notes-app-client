@@ -1,6 +1,11 @@
 import { useContext } from 'react';
 import { NotesContext } from '../../context/NotesContext';
-import { CreateNoteIcon, DeleteNoteIcon, HamburgerIcon } from './icons';
+import {
+	CreateNoteIcon,
+	DeleteNoteIcon,
+	HamburgerIcon,
+	LeftArrowIcon,
+} from './icons';
 import { Header } from './Header';
 import { useIsMobile } from '../../hooks';
 import { checkNoteLengthValid } from '../../utilities';
@@ -11,6 +16,7 @@ export function Menu() {
 		currentNote,
 		handleCreateNote,
 		handleDeleteNote,
+		isSidebarOpen,
 		setIsSidebarOpen,
 		isLoading,
 		isTyping,
@@ -20,29 +26,10 @@ export function Menu() {
 
 	const isMobile = useIsMobile();
 
-	const buttonClasses = [
-		styles.Button,
-		isTyping || isLoading ? styles.ButtonDisabled : '',
-	].join(' ');
-
 	const allNoteLengthsValid = [
 		...notes.filter((note) => note.id !== currentNote.id),
 		currentNote,
 	].every((note) => checkNoteLengthValid(note?.text || ''));
-
-	const createNoteIconClasses = [
-		styles.Icon,
-		styles.CreateNoteIcon,
-		!checkNoteLengthValid(currentNote?.text) ? styles.IconDisabled : '',
-	].join(' ');
-
-	const onTryCreateNote = () => {
-		if (allNoteLengthsValid) {
-			handleCreateNote();
-		} else {
-			setCurrentNote(notes.find((note) => !checkNoteLengthValid(note.text)));
-		}
-	};
 
 	const createDisabled =
 		isTyping || isLoading || !checkNoteLengthValid(currentNote?.text);
@@ -52,14 +39,38 @@ export function Menu() {
 		isLoading ||
 		(notes.length === 1 && !allNoteLengthsValid) ||
 		notes.length === 0;
+
+	const buttonClasses = [
+		styles.Button,
+		isTyping || isLoading ? styles.ButtonDisabled : '',
+	].join(' ');
+
 	const createButtonClasses = [
 		buttonClasses,
 		createDisabled ? styles.Disabled : '',
 	].join(' ');
+
 	const deleteButtonClasses = [
 		buttonClasses,
 		deleteDisabled ? styles.Disabled : '',
 	].join(' ');
+
+	const createNoteIconClasses = [
+		styles.Icon,
+		styles.CreateNoteIcon,
+		!checkNoteLengthValid(currentNote?.text) ? styles.IconDisabled : '',
+	].join(' ');
+
+	const hamburgerIconClasses = [styles.Icon, styles.HamburgerIcon].join(' ');
+	const leftArrowIconClasses = [styles.Icon, styles.LeftArrowIcon].join(' ');
+
+	const onTryCreateNote = () => {
+		if (allNoteLengthsValid) {
+			handleCreateNote();
+		} else {
+			setCurrentNote(notes.find((note) => !checkNoteLengthValid(note.text)));
+		}
+	};
 
 	return (
 		<div className={styles.MenuContainer}>
@@ -70,7 +81,11 @@ export function Menu() {
 					tabIndex={0}
 					onClick={() => setIsSidebarOpen((curr) => !curr)}
 				>
-					<HamburgerIcon className={styles.Icon} />
+					{isSidebarOpen ? (
+						<LeftArrowIcon className={leftArrowIconClasses} />
+					) : (
+						<HamburgerIcon className={hamburgerIconClasses} />
+					)}
 				</button>
 			)}
 			<button

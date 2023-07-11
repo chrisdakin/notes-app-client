@@ -45,3 +45,19 @@
 .CreateNoteIcon {
 	fill: transparent;
 }
+
+.CreateNoteIcon > path:last-child {
+	fill: var(--global-icon-color);
+}
+
+.CreateNoteIcon > path:last-child {
+	stroke: transparent;
+}
+
+.HamburgerIcon > path {
+	fill: var(--global-icon-color);
+}
+
+.LeftArrowIcon > path {
+	fill: var(--global-icon-color);
+}
