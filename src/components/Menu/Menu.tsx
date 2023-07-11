@@ -44,12 +44,14 @@ export function Menu() {
 		}
 	};
 
-	const createDisabled = isTyping || isLoading;
+	const createDisabled =
+		isTyping || isLoading || !checkNoteLengthValid(currentNote?.text);
 	const deleteDisabled =
 		!currentNote ||
 		isTyping ||
 		isLoading ||
-		(notes.length <= 1 && !allNoteLengthsValid);
+		(notes.length === 1 && !allNoteLengthsValid) ||
+		notes.length === 0;
 	const createButtonClasses = [
 		buttonClasses,
 		createDisabled ? styles.Disabled : '',

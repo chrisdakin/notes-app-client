@@ -88,6 +88,7 @@ export function NotesContextProvider({
 
 	const handleCreateNote = () => {
 		const createNoteWrapper = async () => {
+			setIsLoading(true);
 			let response;
 			const createNote = async () => {
 				response = await addNote();
@@ -98,8 +99,11 @@ export function NotesContextProvider({
 			setCurrentNote(
 				response.data.notes.find((note) => note.id === response.data.newNoteId)
 			);
+			setIsLoading(false);
 		};
-		createNoteWrapper();
+		if (!isLoading) {
+			createNoteWrapper();
+		}
 	};
 
 	const handleSaveCurrentNote = async (keepalive: boolean = false) => {
@@ -138,9 +142,13 @@ export function NotesContextProvider({
 	};
 
 	const handleDeleteNote = async (id: string) => {
-		const response = await deleteNote(id);
-		setCurrentNote(response.data.notes[0] || null);
-		setNotes(response.data.notes);
+		if (!isLoading) {
+			setIsLoading(true);
+			const response = await deleteNote(id);
+			setCurrentNote(response.data.notes[0] || null);
+			setNotes(response.data.notes);
+			setIsLoading(false);
+		}
 	};
 
 	return (
