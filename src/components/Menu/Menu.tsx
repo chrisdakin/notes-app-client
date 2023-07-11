@@ -25,12 +25,16 @@ export function Menu() {
 		isTyping || isLoading ? styles.ButtonDisabled : '',
 	].join(' ');
 
-	const createNoteIconClasses = [styles.Icon, styles.CreateNoteIcon].join(' ');
-
 	const allNoteLengthsValid = [
 		...notes.filter((note) => note.id !== currentNote.id),
 		currentNote,
 	].every((note) => checkNoteLengthValid(note?.text || ''));
+
+	const createNoteIconClasses = [
+		styles.Icon,
+		styles.CreateNoteIcon,
+		!allNoteLengthsValid ? styles.IconDisabled : '',
+	].join(' ');
 
 	const onTryCreateNote = () => {
 		if (allNoteLengthsValid) {
@@ -39,6 +43,18 @@ export function Menu() {
 			setCurrentNote(notes.find((note) => !checkNoteLengthValid(note.text)));
 		}
 	};
+
+	const createDisabled = isTyping || isLoading || !allNoteLengthsValid;
+	const deleteDisabled =
+		!currentNote || isTyping || isLoading || notes.length <= 1;
+	const createButtonClasses = [
+		buttonClasses,
+		createDisabled ? styles.Disabled : '',
+	].join(' ');
+	const deleteButtonClasses = [
+		buttonClasses,
+		deleteDisabled ? styles.Disabled : '',
+	].join(' ');
 
 	return (
 		<div className={styles.MenuContainer}>
@@ -53,9 +69,9 @@ export function Menu() {
 				</button>
 			)}
 			<button
-				disabled={isTyping || isLoading}
+				disabled={createDisabled}
 				aria-label="Create Note"
-				className={buttonClasses}
+				className={createButtonClasses}
 				tabIndex={0}
 				onClick={onTryCreateNote}
 			>
@@ -64,14 +80,16 @@ export function Menu() {
 			<Header />
 			<button
 				aria-label="Delete Note"
-				className={buttonClasses}
+				className={deleteButtonClasses}
 				tabIndex={0}
-				disabled={!currentNote || isTyping || isLoading}
+				disabled={deleteDisabled}
 				onClick={() => {
 					handleDeleteNote(currentNote.id);
 				}}
 			>
-				<DeleteNoteIcon className={styles.Icon} />
+				<DeleteNoteIcon
+					className={notes.length <= 1 ? styles.IconDisabled : styles.Icon}
+				/>
 			</button>
 		</div>
 	);

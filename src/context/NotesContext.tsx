@@ -4,6 +4,7 @@ import {
 	ReactElement,
 	Dispatch,
 	SetStateAction,
+	useEffect,
 } from 'react';
 import { Note } from '../types';
 import { addNote, saveNote, getNotes, deleteNote } from '../api';
@@ -56,6 +57,12 @@ export function NotesContextProvider({
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 	const [isTyping, setIsTyping] = useState(false);
 	const [isLoading, setIsLoading] = useState(false);
+
+	useEffect(() => {
+		if (!notes.length && !currentNote) {
+			handleCreateNote();
+		}
+	}, [notes, currentNote]);
 
 	const handleChangeNote = (id: string) => {
 		if (

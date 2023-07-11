@@ -7,22 +7,13 @@
 	padding: 0 16px;
 	align-items: center;
 }
-/* 
-@media (max-width: 768px) {
-	.MenuContainer {
-		justify-content: center;
-		> * {
-			margin: 0 16px;
-		}
-	}
-} */
 
 .Button:focus-visible {
 	outline: 1px solid #fff;
 }
 
-.ButtonDisabled {
-	cursor: wait;
+.Disabled {
+	cursor: default !important;
 }
 
 .Icon {
@@ -40,6 +31,15 @@
 
 .Icon:hover:not(:active) > path {
 	stroke: var(--global-icon-color-hover);
+}
+
+.IconDisabled {
+	height: 24px;
+	width: 24px;
+}
+
+.IconDisabled > path {
+	stroke: var(--global-icon-color-disabled) !important;
 }
 
 .CreateNoteIcon {

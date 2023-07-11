@@ -60,6 +60,7 @@ button:hover {
 	--global-icon-color: #b3b3b3;
 	--global-icon-color-hover: #ffffff;
 	--global-icon-color-active: #696969;
+	--global-icon-color-disabled: #818181;
 	--global-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto',
 		'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
 		sans-serif;
