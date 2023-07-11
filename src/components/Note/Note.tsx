@@ -13,7 +13,7 @@ export function CurrentNote() {
 		setIsCurrentNoteDirty,
 		isTyping,
 		setIsTyping,
-		handleCreateNote,
+		setIsSidebarOpen,
 	} = useContext(NotesContext);
 
 	const inputElement = useRef(null);
@@ -46,23 +46,24 @@ export function CurrentNote() {
 		}
 	}, [isTyping]);
 
-	return currentNote ? (
-		<div className={styles.NoteContainer}>
-			<textarea
-				ref={inputElement}
-				aria-label="Note Textarea"
-				className={styles.TextArea}
-				onChange={(evt) => {
-					handleIsTyping(500);
-					handleUpdateNote(evt.target.value);
-				}}
-				value={currentNote.text}
-			/>
-			<br />
-		</div>
-	) : (
-		<div className={styles.NoNotes} onClick={handleCreateNote}>
-			Click here to add a new note
-		</div>
+	return (
+		currentNote && (
+			<div className={styles.NoteContainer}>
+				<textarea
+					ref={inputElement}
+					aria-label="Note Textarea"
+					className={styles.TextArea}
+					onClick={() => {
+						setIsSidebarOpen(false);
+					}}
+					onChange={(evt) => {
+						handleIsTyping(500);
+						handleUpdateNote(evt.target.value);
+					}}
+					value={currentNote.text}
+				/>
+				<br />
+			</div>
+		)
 	);
 }

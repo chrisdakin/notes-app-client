@@ -40,18 +40,13 @@ export function Menu() {
 		(notes.length === 1 && !allNoteLengthsValid) ||
 		notes.length === 0;
 
-	const buttonClasses = [
-		styles.Button,
-		isTyping || isLoading ? styles.ButtonDisabled : '',
-	].join(' ');
-
 	const createButtonClasses = [
-		buttonClasses,
+		styles.Button,
 		createDisabled ? styles.Disabled : '',
 	].join(' ');
 
 	const deleteButtonClasses = [
-		buttonClasses,
+		styles.Button,
 		deleteDisabled ? styles.Disabled : '',
 	].join(' ');
 
@@ -77,7 +72,7 @@ export function Menu() {
 			{isMobile && (
 				<button
 					aria-label="Toggle Sidebar"
-					className={buttonClasses}
+					className={styles.Button}
 					tabIndex={0}
 					onClick={() => setIsSidebarOpen((curr) => !curr)}
 				>
@@ -108,7 +103,7 @@ export function Menu() {
 				}}
 			>
 				<DeleteNoteIcon
-					className={notes.length <= 1 ? styles.IconDisabled : styles.Icon}
+					className={deleteDisabled ? styles.IconDisabled : styles.Icon}
 				/>
 			</button>
 		</div>
